@@ -38,7 +38,11 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -102,10 +106,12 @@ public class LibraryServer implements Runnable{
       }
       catch (IOException e) {
          System.out.println(e);
-      }
+      } catch (ParseException ex) {
+            Logger.getLogger(LibraryServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
    }
     
-   public void handletask(String input, PrintStream os){
+   public void handletask(String input, PrintStream os) throws ParseException{
        System.out.println("handling task");
        String[] parts = input.split("#");
        Work newWork;
@@ -126,7 +132,7 @@ public class LibraryServer implements Runnable{
                 worker.WorkQueue.put(newWork);
                 break;                
             case("4"):
-                Book reserve = new Book(parts[1], Boolean.valueOf(parts[2]), parts[3], new Date(), parts[4]);
+                Book reserve = new Book(parts[1], Boolean.valueOf(parts[2]), parts[3], new SimpleDateFormat("yyyy-MM-dd").parse(parts[4]), parts[5]);
                 newWork = new Work(reserve, 4, os);
                 worker.WorkQueue.put(newWork);
                 break;

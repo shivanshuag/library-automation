@@ -49,7 +49,7 @@ public class Book {
     
     public String toString(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String book = this.name+"#"+this.issued.toString()+"#"+this.issuedTo+"#"+dateFormat.format(this.issuedOn)+"#"+this.reservedBy+"#";
+        String book = this.name+"#"+this.issued.toString()+"# "+this.issuedTo+"#"+dateFormat.format(this.issuedOn)+"# "+this.reservedBy+"#";
         return book;
     }
 }
