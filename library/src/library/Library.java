@@ -57,9 +57,9 @@ public class Library {
             System.err.println("Couldn't get I/O for the connection to: hostname");
         }
         if (libSocket != null && os != null && is != null) {
-            String state = "insert/search";
+            String state = "username";
             String menu= "";
-            String choice, response, name, parts[];
+            String choice, response, name = null, parts[] = null;
             try {
                 loop:while(true){
                     switch(state){
@@ -122,31 +122,31 @@ public class Library {
                                 print += "\nIssued: "+parts[1];
                                 print += "\nIssued To: "+parts[2];
                                 print += "\nIssued On: "+parts[3];
-                                print += "\n Reserved By: "+parts[4];
+                                print += "\nReserved By: "+parts[4];
                                 System.out.println(print);
                                 state = "reserve/renew";
                             }
                             break;
                         case("reserve/renew"):
                             menu = "";
-                            if((Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - Integer.parseInt(parts[3].split("-")[2]) >= 7) || "".equals(parts[2]))
+                            if((Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - Integer.parseInt(parts[3].split("-")[2]) >= 7) || " ".equals(parts[2]))
                                 menu += "1. Issue the book\n";
-                            else if(parts[2].equals(name) && "".equals(parts[4]))
+                            else if(parts[2].equals(name) && " ".equals(parts[4]))
                                 menu += "2. Renew the book\n";
-                            else 
+                            else if(" ".equals(parts[4]))
                                 menu += "3. Reserve the book\n";
-                            menu += "4. go back to main menu";
+                            menu += "4. Go back to main menu\n";
                             menu += "Enter your choice: ";
                             System.out.print(menu);
                             choice = console.readLine();
                             if("1".equals(choice)){
-                                os.println("3#"+part[0]+"#true#"+name);
+                                os.println("3#"+parts[0]+"#true#"+name);
                             }
                             else if("2".equals(choice)){
-                                os.println("3#"+part[0]+"#true#"+name);
+                                os.println("3#"+parts[0]+"#true#"+name);
                             }
                             else if("3".equals(choice)){
-                                os.println("4#"+part[0]+"#true#"+parts[2]+"#"+parts[3]+"#"+name);
+                                os.println("4#"+parts[0]+"#true#"+parts[2]+"#"+parts[3]+"#"+name);
                             }
                             if("1".equals(choice) || "2".equals(choice) || "3".equals(choice)){
                                 response = input.readLine();

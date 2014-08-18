@@ -55,26 +55,26 @@ public class WorkerThread implements Runnable{
             if(remove != null){
                 switch(remove.op){
                     case(1):
-                        books.put(remove.book.name, remove.book);
+                        books.put(remove.book.name.toLowerCase(), remove.book);
                         remove.os.println("Success");
                         break;
                     case(2):
-                        Book get = books.get(remove.book.name);
+                        Book get = books.get(remove.book.name.toLowerCase());
                         if(get == null)
                             remove.os.println("Not found");
                         else
-                            remove.os.println(remove.book.toString());
+                            remove.os.println(books.get(remove.book.name.toLowerCase()).toString());
                         break;
                     case(3):
                     case(4):
-                        books.put(remove.book.name, remove.book);
-                        remove.os.println(remove.book.toString());
+                        books.put(remove.book.name.toLowerCase(), remove.book);
+                        remove.os.println(books.get(remove.book.name.toLowerCase()).toString());
                         break;
                     default:
                         remove.os.println("Invalid Operation");
                 }
                 
-                System.out.println("Work succeeded:"+remove.book.toString());
+                System.out.println("Work succeeded:"+books.get(remove.book.name.toLowerCase()).toString());
             }
         }
     }
